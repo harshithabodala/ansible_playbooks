@@ -1,0 +1,15 @@
+---
+- name: install git and clone a remote repo from github
+  hosts: all
+  tasks:
+    - name: install git
+      apt: 
+        name: git
+        state: present
+        update_cache: yes
+    - name: clone a remote repo from github
+      git:
+        repo: https://github.com/IntelliqDevops/FunctionalTesting.git
+        dest: /tmp/mygit
+
+...

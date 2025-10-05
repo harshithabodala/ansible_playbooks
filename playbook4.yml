@@ -1,0 +1,13 @@
+---
+- name: create an empty folder and download jenkins.war into it 
+  hosts: all
+  tasks:
+    - name: create an empty folder
+      file:
+        name: /tmp/mydir
+        state: directory
+    - name: download jenkins.war
+      get_url:
+        url: https://get.jenkins.io/war-stable/2.516.3/jenkins.war
+        dest: /tmp/mydir
+...

@@ -1,0 +1,39 @@
+---
+- name: configure apache2/httpd on all servers
+  hosts: all
+  tasks:
+    - block:
+      - name: install apache2 on ubuntu servers
+        apt:
+          name: apache2
+          state: present
+          update_cache: yes
+      rescue:
+        - name: install httpd on redhat servers
+          yum:
+            name: httpd
+            state: present
+            update_cache: yes
+    - name: edit the index.html file
+      copy:
+        content: "intell"
+        dest: /var/www/html/index.html
+    - block: 
+        - name: restart apache2 on ubuntu servers
+          service:
+            name: apache2
+            state: restarted
+      rescue:
+        - name: Restart httpd
+          service:
+            name: httpd
+            state: restarted
+    - name: check apache/httpd response on all servers
+      uri:
+        url: "{{item}}"
+        status_code: 200
+      with_items:
+        - http://172.31.21.137
+        - http://172.31.18.79
+        - http://172.31.29.103
+...

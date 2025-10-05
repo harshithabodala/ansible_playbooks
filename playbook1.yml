@@ -1,0 +1,14 @@
+---
+- name: create user on all servers
+  hosts: appserver
+  tasks: 
+    - name: user creation 
+      user: 
+        name: anu
+        password: intell
+        uid: 1234
+        home: /home/anu
+        comment: "a normal user"
+        shell: /bin/bash
+...
+

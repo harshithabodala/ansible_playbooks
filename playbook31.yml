@@ -1,0 +1,33 @@
+---
+- name: Configure Apache/HTTPD based on Linux flavour
+  hosts: all
+  become: yes
+  vars:
+    apache_pkg: "{{ 'apache2' if ansible_distribution == 'Ubuntu' else 'httpd' }}"
+    apache_service: "{{ 'apache2' if ansible_distribution == 'Ubuntu' else 'httpd' }}"
+
+  tasks:
+    - name: Install Apache/HTTPD
+      package:
+        name: "{{ apache_pkg }}"
+        state: present
+      register: install_status
+
+    - name: Deploy index.html
+      copy:
+        content: "Welcome to my world"
+        dest: /var/www/html/index.html
+  
+
+    - name: Check Apache/HTTPD response on all servers
+      uri:
+        url: "{{ item }}"
+        status_code: 200
+      loop:
+        - http://172.31.21.137
+        - http://172.31.18.79
+        - http://172.31.29.103
+
+
+
+
