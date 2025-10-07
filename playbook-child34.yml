@@ -1,0 +1,7 @@
+---
+- name: copy group file
+  copy:
+    src: /etc/group
+    dest: /tmp
+...
+  

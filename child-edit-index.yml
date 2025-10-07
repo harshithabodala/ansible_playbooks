@@ -1,0 +1,6 @@
+---
+- name:
+  copy:
+    content: "intell"
+    dest: /var/www/index.html
+...
