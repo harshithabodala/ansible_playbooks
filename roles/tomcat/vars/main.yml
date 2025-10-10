@@ -1,0 +1,16 @@
+#SPDX-License-Identifier: MIT-0
+---
+# vars file for tomcat
+pkg1: tomcat10
+pkg2: tomcat10-admin
+state1: present
+cache1: yes
+cache2: no
+file1: tomcat-user.xml
+dest1: /etc/tomcat10
+port1: 8080
+port2: 9090
+path1: /etc/tomcat10/server.xml
+state2: restarted
+min: 1
+...

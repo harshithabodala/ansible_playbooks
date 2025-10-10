@@ -1,0 +1,5 @@
+---
+- name: configure apache2 using roles
+  hosts: all
+  roles:
+    - apache
